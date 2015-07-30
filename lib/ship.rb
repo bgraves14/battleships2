@@ -1,12 +1,18 @@
 class Ship
-  attr_reader :size
-  attr_accessor :coordinates, :direction
+  
+  SHIP_TYPES = {test: 1, destroyer: 2, cruiser: 3, submarine: 3, battleship: 4, aircraft_carrier: 5}
 
-  def initialize
-    @placed = false
-    @size = 1
-    @coordinates
-    @direction = :N
+  def self.method_missing(method, *args, &block)
+    return Ship.new(SHIP_TYPES[method]) if SHIP_TYPES.include?(method)
+    super
+  end
+
+  attr_reader :size, :material
+  attr_accessor :status
+
+  def initialize(size)
+    @size = size
+    @status = :floating
     @material = :s
   end
 

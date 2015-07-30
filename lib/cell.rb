@@ -1,4 +1,5 @@
 require_relative "water"
+require_relative "ship"
 
 class Cell
 
@@ -14,6 +15,7 @@ class Cell
 	end
 
 	def change_type(ship)
+		fail "There is already a ship here!" if type === ship
 		@type = ship
 	end
 

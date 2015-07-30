@@ -3,7 +3,7 @@ require "cell"
 describe Cell do
 
 let(:water) { double :water, :material => :~}
-let(:ship) { double :ship, :material => :s}
+let(:ship) { double :ship, :placed => false, :material => :s}
 subject { Cell.new(content: water)}
 
 	it "is water when created" do
@@ -15,8 +15,13 @@ subject { Cell.new(content: water)}
 	end
 
 	it "can change material" do
-		subject.change_type(ship)
+	    cell = subject.change_type(ship)
 		expect(subject.type).to eq ship
+	end
+
+	it "should not contain more than one ship" do
+		subject.type = ship
+		expect{subject.change_type(ship)}.to raise_error "There is already a ship here!"
 	end
 
 end
