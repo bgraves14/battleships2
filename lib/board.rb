@@ -15,9 +15,20 @@ class Board
 		grid.matrix.map{|row| row.map{|el| el.type.material} }
 	end
 
-	def place_ship(ship,coordinate,direction)
+	def check_coordinates(ship, index, direction)
+		direction == :horizontal ? matrix_reference = 0 : matrix_reference = 1
+	end
+
+	def place_ship(ship, coordinate, direction)
 		converted = convert_coordinates(coordinate)
-		cell = grid.find_cell(converted)
-		cell.change_type(ship)
+		orientation = check_coordinates(ship, coordinate, direction)
+		cells_to_ship(ship, converted, orientation)
+	end
+
+	def cells_to_ship(ship, converted, orientation)
+		ship.size.times do
+			grid.find_cell(converted).change_type(ship)
+			converted[orientation] += 1
+		end
 	end
 end
