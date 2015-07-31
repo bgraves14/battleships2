@@ -15,7 +15,7 @@ class Cell
 	end
 
 	def change_type(ship)
-		fail "There is already a ship here!" if type === ship
+		fail "There is already a ship here!" if @type == ship
 		@type = ship
 	end
 

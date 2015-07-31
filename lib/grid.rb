@@ -5,6 +5,7 @@ class Grid
   AREA = 10
 
   attr_accessor :matrix, :area
+  
   def initialize
     @area = AREA
     @matrix = matrix_builder(AREA)
